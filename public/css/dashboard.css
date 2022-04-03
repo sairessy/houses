@@ -1,0 +1,136 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  height: 80px;
+  z-index: 2;
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+}
+
+/* Main */
+#btn-add-product {
+  padding: 10px;
+  width: 130px;
+  margin-right: 10px;
+  outline: none;
+  border: none;
+  background-color: #ffff;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#btn-add-product i {
+  margin-right: 10px;
+}
+
+#products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  flex-wrap: wrap;
+  grid-gap: 20px;
+  padding: 10px 40px;
+}
+.product {
+  background-color: #fcfcfc;
+  width: 300px;
+  height: 350px;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-cover {
+  height: 250px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: url(../assets/img/image.svg) no-repeat center center/100px;
+  background-color: #eee;
+  position: relative;
+}
+
+.price-negociable {
+  margin: 10px;
+}
+
+.price-negociable .negociable {
+  color: #2bccb1;
+  width: fit-content;
+  padding: 5px;
+}
+
+.product-title {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.product-title .location {
+  color: #666;
+  font-size: 14px;
+}
+
+.product-controls {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 5px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.product-controls a {
+  margin-left: 10px;
+}
+
+#btn-add-product i {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 414px) {
+  #btn-add-product {
+    padding: 10px;
+    width: unset;
+    margin-right: 10px;
+    outline: none;
+    border: none;
+    background-color: #ffff;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  #btn-add-product span {
+    display: none;
+  }
+
+  #products {
+    padding: 10px;
+  }
+
+  .product {
+    width: 100%;
+    margin: auto;
+  }
+}

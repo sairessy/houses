@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/img/logo/logo.svg" type="image/x-icon">
+  <title>Adicionar producto</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/addproduct.css">
+
+</head>
+<body>
+  <main>
+    <div class="form-add-product-container">
+      <form action="" id="form-add-product">
+        <div class="cover"></div>
+        <input type="text" id="input-title" placeholder="Título">
+        <input type="number" id="input-price" placeholder="Preço">
+        <select id="select-mode">
+          <option value="0">Renda</option>
+          <option value="1">Venda</option>
+        </select>
+        <select id="select-periodicity">
+          <option value="">Periodicidade de pagamento</option>
+          <option value="0">Anual</option>
+          <option value="1">Mensal</option>
+        </select>
+        <select id="select-type">
+          <option value="0">Simples</option>
+          <option value="1">Flat</option>
+          <option value="2">Condomínio</option>
+        </select>
+        <select id="select-size">
+          <option value="0">Tipo 1</option>
+          <option value="1">Tipo 2</option>
+          <option value="2">Tipo 3</option>
+          <option value="3">Tipo 4</option>
+        </select>
+        <div id="negociable">
+          <label for="check-negociable">Negociável</label>
+          <input type="checkbox" id="check-negociable" checked>
+        </div>
+        <select id="select-location">
+          <option value="">Seleccionar local</option>
+        </select>
+       
+        <input type="submit" value="Adicionar">
+      </form>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script>
+    let img = null;
+
+    const mode = document.getElementById("select-mode").addEventListener("change", e => {
+      document.getElementById("select-periodicity").style.display = e.target.value == "1" ? "none" : "flex";
+    });
+
+    document.getElementById("form-add-product").addEventListener("submit", async e => {
+      e.preventDefault();
+      const title = document.getElementById("input-title").value;
+      const price = document.getElementById("input-price").value;
+      const mode = document.getElementById("select-mode").value;
+      const negociable = document.getElementById("check-negociable").checked;
+      const periodicity = document.getElementById("select-periodicity").value;
+      const type = document.getElementById("select-type").value;
+      const size = document.getElementById("select-size").value;
+      const location = document.getElementById("select-location").value;
+
+      const data = {img, title, price, mode, periodicity, location, negociable, size, type };
+      console.log(data);
+      const res = await fetch("/addproduct", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const json = await res.json();
+
+      if(json.success) {
+        alert("Adicionado com sucesso!");
+      } else {
+        alert("Houve um erro tente novamente");
+      }
+    });
+
+    let locations = '<option value="">Seleccionar local</option>';
+    config.locations.forEach(l => {
+      locations += `<option value="${l.id}">${l.label}</option>`;
+    })
+    document.getElementById("select-location").innerHTML = locations;
+  </script>
+</body>
+</html>

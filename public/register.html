@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/img/logo/logo.svg" type="image/x-icon">
+  <title>Registar</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+  <form action="" id="form-login">
+    <input type="email" placeholder="Email" autofocus id="email">
+    <input type="password" placeholder="Telefone" id="contact">
+    <input type="password" placeholder="Senha" id="pass">
+    <input type="password" placeholder="Confirmar senha" id="c-pass">
+    <a id="a-recovery" href="#"><span>Esqueceu a senha?</span></a>
+    <a id="a-home" href="/"><span>Página inicial</span></a>
+    <input type="submit" id="" value="Registar">
+    <div id="line"><span>OU</span></div>
+    <a href="/login" id="a-new-account"><span>Entrar</span></a>
+  </form>
+
+  <script>
+    document.getElementById("form-login").addEventListener("submit", async e => {
+      e.preventDefault();
+      const email = document.getElementById("email").value
+      const pass = document.getElementById("pass").value
+      const cPass = document.getElementById("c-pass").value
+      const contact = document.getElementById("contact").value
+
+      if(pass != cPass) {
+        alert("As senhas não coincidem!");
+        return;
+      }
+
+      const data = {email, contact, pass};
+      console.log(data);
+
+      const res = await fetch("/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const json = await res.json();
+
+      if(json.success) {
+        window.location.href = "/login";
+      } else {
+        alert("Houve um erro, tente novamente!");
+      }
+    });
+  </script>
+</body>
+</html>

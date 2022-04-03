@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/img/logo/logo.svg" type="image/x-icon">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <form action="" id="form-login">
+    <input type="email" placeholder="Email" id="email" autofocus>
+    <input type="password" placeholder="Senha" id="pass">
+    <a id="a-recovery" href="#"><span>Esqueceu a senha?</span></a>
+    <a id="a-home" href="/"><span>Página inicial</span></a>
+    <input type="submit" id="" value="Entrar">
+    <div id="line"><span>OU</span></div>
+    <a href="/register" id="a-new-account"><span>Criar conta</span></a>
+  </form>
+
+  <script>
+    document.getElementById("form-login").addEventListener("submit", async e => {
+      e.preventDefault();
+      const email = document.getElementById("email").value
+      const pass = document.getElementById("pass").value
+
+      const data = {email, pass};
+      console.log(data);
+      const res = await fetch("/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const json = await res.json();
+
+      if(json.success) {
+        window.location.href = "/dashboard";
+      } else {
+        alert("Email ou senha invávlida");
+      }
+    });
+  </script>
+</body>
+</html>
